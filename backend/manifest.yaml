@@ -35,18 +35,18 @@ spec:
       initContainers:
       - name: init-myservice
         image: busybox:1.28
-        command: ['sh', '-c', "until nslookup db; do echo waiting for myservice; sleep 2; done"]
+        command: ['sh', '-c', "until nslookup db-dev.susmitha.online; do echo waiting for myservice; sleep 2; done"]
       containers:
       - name: backend
         image: susmitha925/backend:v1.0
-         resources:
+        resources:
           requests:
             cpu: "100m"
             memory: "128Mi"
           limits:
             cpu: "150m"
             memory: "256Mi"
-          livenessProbe:
+        livenessProbe:
           httpGet:
             path: /health
             port: 8080
